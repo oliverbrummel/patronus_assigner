@@ -13,6 +13,7 @@ if (process.env.DATABASE_URL){
 function initializeDB() {
   pg.connect(connectionString, function(err, client, done) {
     if (err) {
+      console.log('connectionString:', connectionString);
       console.log("Error connection to DB", err);
       process.exit(1);
     } else {
