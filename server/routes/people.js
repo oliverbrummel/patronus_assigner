@@ -44,7 +44,7 @@ router.get('/', function(request, response){
       console.log(err);
       response.sendStatus(500);
     } else {
-      var query = client.query("SELECT * FROM people;");
+      var query = client.query("SELECT * FROM people LEFT JOIN patronus ON people.patronus_id = patronus.patronus_id;");
       var results = [];
 
       query.on("error", function(err){

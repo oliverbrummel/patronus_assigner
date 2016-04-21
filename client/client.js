@@ -7,6 +7,10 @@ app.controller('PatronusController', ['$http', function($http){
   controller.patronus = {};
   controller.peopleList = [];
   controller.patronusesList = [];
+  controller.unassignedPeopleList = [];
+  controller.assignedPeopleList = [];
+  controller.peopleID = 0;
+  controller.patronusesID = 0;
 
   controller.savePerson = function(){
     console.log(controller.person);
@@ -26,12 +30,28 @@ app.controller('PatronusController', ['$http', function($http){
   controller.getPeople = function(){
     $http.get('/people').then(function(response){
       controller.peopleList = response.data;
+      console.log('peopleList', controller.peopleList);
+      controller.unassignedPeopleList = controller.peopleList.filter(function(person){
+        return person.patronus_id == null;
+      });
+      console.log('unassignedPeopleList', controller.unassignedPeopleList);
+
+      controller.assignedPeopleList = controller.peopleList.filter(function(person){
+        return person.patronus_id !== null;
+      });
     });
   };
 
   controller.getPatronuses = function(){
     $http.get('/patronuses').then(function(response){
       controller.patronusesList = response.data;
+    });
+  };
+
+  controller.assignPatronus = function() {
+    $http.put("/people/" + controller.peopleID, {patronus_id : controller.patronusesID}).then(function(response) {
+      controller.getPatronuses();
+      controller.getPeople();
     });
   };
 

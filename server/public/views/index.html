@@ -27,16 +27,42 @@
       <input type="submit" />
     </form>
     <div>
+      Unassigned People
       <ul>
-        <li ng-repeat = "person in controller.peopleList">
-          {{person.first_name}} {{person.last_name}} {{person.patronus_id}}
+        <li ng-repeat = "person in controller.unassignedPeopleList">
+          {{person.first_name}} {{person.last_name}}
         </li>
       </ul>
     </div>
+    Available Patronuses
     <div>
       <ul>
         <li ng-repeat = "patronus in controller.patronusesList">
           {{patronus.patronus_name}} {{patronus.patronus_id}}
+        </li>
+      </ul>
+    </div>
+
+    <form ng-submit="controller.assignPatronus()">
+      <select ng-model="controller.peopleID">
+        <option ng-repeat = "people in controller.unassignedPeopleList" value="{{people.id}}">
+          {{ people.first_name }} {{ people.last_name }}
+        </option>
+      </select>
+
+      <select ng-model="controller.patronusesID">
+        <option ng-repeat = "patronus in controller.patronusesList" value="{{patronus.patronus_id}}">
+          {{ patronus.patronus_name }}
+        </option>
+      </select>
+      <input type="submit" />
+    </form>
+
+    <div>
+      Assigned
+      <ul>
+        <li ng-repeat="assignedPerson in controller.assignedPeopleList">
+          {{assignedPerson.first_name}} {{assignedPerson.last_name}} {{assignedPerson.patronus_name}}
         </li>
       </ul>
     </div>
