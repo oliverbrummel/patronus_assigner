@@ -2,67 +2,74 @@
 <html ng-app="patronusApp">
   <head>
     <meta charset="utf-8">
-    <title>Title</title>
+    <title>Patronus Assigner</title>
 
     <!-- Libraries -->
     <script src="vendor/angular/angular.min.js"></script>
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css"/>
 
     <!-- Custom -->
     <script src="assets/scripts/client.min.js"></script>
-
+    <link rel="stylesheet" href="assets/styles/style.css" />
 
   </head>
   <body ng-controller="PatronusController as controller">
-    <form ng-submit="controller.savePerson()">
+    <div class="jumbotron">
+      <h1 class="text-center">Patronus Assigner</h1>
+    </div>
+
+    <form class="col-md-4 col-md-offset-2" ng-submit="controller.savePerson()">
       <label>First Name</label>
       <input type="text" ng-model="controller.person.first_name"/>
       <label>Last Name</label>
       <input type="text" ng-model="controller.person.last_name"/>
-      <input type="submit" />
+      <input class="btn btn-primary" type="submit" />
     </form>
 
-    <form ng-submit="controller.savePatronus()">
+    <form class="col-md-4 col-md-offset-1" ng-submit="controller.savePatronus()">
       <label>Patronus</label>
       <input type="text" ng-model="controller.patronus.name"/>
-      <input type="submit" />
+      <input class="btn btn-primary" type="submit" />
     </form>
-    <div>
-      Unassigned People
-      <ul>
+    <div class="col-md-4 col-md-offset-2 text-center">
+      <h2>Unassigned People</h2>
+      <ul class="text-left">
         <li ng-repeat = "person in controller.unassignedPeopleList">
           {{person.first_name}} {{person.last_name}}
         </li>
       </ul>
     </div>
-    Available Patronuses
-    <div>
-      <ul>
+
+    <div class="col-md-4 col-md-offset-1 text-center">
+      <h2>Available Patronuses</h2>
+      <ul class="text-left">
         <li ng-repeat = "patronus in controller.patronusesList">
           {{patronus.patronus_name}}
         </li>
       </ul>
     </div>
 
-    <form ng-submit="controller.assignPatronus()">
-      <select ng-model="controller.peopleID">
+    <form class="col-md-4 col-md-offset-2 text-center" ng-submit="controller.assignPatronus()">
+      <h2 class="text-center">Assign A Patronus</h2>
+      <select class="input-lg" ng-model="controller.peopleID">
         <option ng-repeat = "people in controller.unassignedPeopleList" value="{{people.id}}">
           {{ people.first_name }} {{ people.last_name }}
         </option>
       </select>
 
-      <select ng-model="controller.patronusesID">
+      <select class="input-lg" ng-model="controller.patronusesID">
         <option ng-repeat = "patronus in controller.patronusesList" value="{{patronus.patronus_id}}">
           {{ patronus.patronus_name }}
         </option>
       </select>
-      <input type="submit" />
+      <input class="btn btn-large btn-primary" type="submit" />
     </form>
 
-    <div>
-      Assigned
-      <ul>
+    <div class="col-md-4 col-md-offset-1 text-center">
+      <h2>Assigned People</h2>
+      <ul class="text-left">
         <li ng-repeat="assignedPerson in controller.assignedPeopleList">
-          {{assignedPerson.first_name}} {{assignedPerson.last_name}} {{assignedPerson.patronus_name}}
+          {{assignedPerson.first_name}} {{assignedPerson.last_name}} has a(n) {{assignedPerson.patronus_name}} patronus
         </li>
       </ul>
     </div>
