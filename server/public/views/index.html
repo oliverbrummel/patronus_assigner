@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="patronusApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Title</title>
+
+    <!-- Libraries -->
+    <script src="vendor/angular/angular.min.js"></script>
+
+    <!-- Custom -->
+    <script src="assets/scripts/client.min.js"></script>
+
+
+  </head>
+  <body ng-controller="PatronusController as controller">
+    <form ng-submit="controller.savePerson()">
+      <label>First Name</label>
+      <input type="text" ng-model="controller.person.first_name"/>
+      <label>Last Name</label>
+      <input type="text" ng-model="controller.person.last_name"/>
+      <input type="submit" />
+    </form>
+
+    <form ng-submit="controller.savePatronus()">
+      <label>Patronus</label>
+      <input type="text" ng-model="controller.patronus.name"/>
+      <input type="submit" />
+    </form>
+    <div>
+      <ul>
+        <li ng-repeat = "person in controller.peopleList">
+          {{person.first_name}} {{person.last_name}} {{person.patronus_id}}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li ng-repeat = "patronus in controller.patronusesList">
+          {{patronus.patronus_name}} {{patronus.patronus_id}}
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
