@@ -1,6 +1,14 @@
 var pg = require("pg");
 
-var connectionString = "postgress://localhost:5432/WitchPatronus";
+var connectionString;
+
+if (process.env.DATABASE_URL){
+  pg.defaults.ssl = true;
+  connectionString = process.env.DATABASE_URL;
+} else {
+  connectionString = "postgres://localhost:5432/WitchPatronus";
+}
+
 
 function initializeDB() {
   pg.connect(connectionString, function(err, client, done) {
