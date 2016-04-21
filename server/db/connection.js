@@ -9,9 +9,9 @@ if (process.env.DATABASE_URL){
   connectionString = "postgres://localhost:5432/WitchPatronus";
 }
 
-
+pg.defaults.ssl = true;
 function initializeDB() {
-  pg.connect(connectionString, function(err, client, done) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     if (err) {
       console.log('connectionString:', connectionString);
       console.log("Error connection to DB", err);
